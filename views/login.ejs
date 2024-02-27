@@ -1,0 +1,108 @@
+<!-- home.ejs複製來的 -->
+<%- include('parts/html-head') %>
+<!-- ejs的include function,要用-號,現在是ejs要引入其他的ejs,這時候要用相對路徑 -->
+<%- include('parts/navbar') %>
+
+
+
+
+<div class="container">
+  <div>這裡是新增文章的~~~~</div>
+
+
+<div class="row">
+    <div class="col-6">
+
+
+      <div class="card">
+
+        <div class="card-body">
+          <h5 class="card-title">登入</h5>
+
+
+          <form name="form1" onsubmit="sendForm(event)">
+
+            <div class="mb-3">
+              <label for="justnumber" class="form-label">justnumber</label>
+              <input type="text" class="form-control" id="justnumber" name="justnumber">
+              <div class="form-text"></div>
+            </div>
+
+
+            <div class="mb-3">
+              <label for="member_id_post" class="form-label">member_id_post</label>
+              <input type="text" class="form-control" id="member_id_post" name="member_id_post">
+              <div class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="board_category_CH" class="form-label">board_category_CH</label>
+              <input type="text" class="form-control" id="board_category_CH" name="board_category_CH">
+              <div class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="title" class="form-label">title</label>
+              <input type="text" class="form-control" id="title" name="title">
+              <div class="form-text"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="content" class="form-label">content</label>
+              <textarea id="content" class="form-control" name="content" cols="30" rows="7"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+
+        </div>
+      </div>
+
+    </div>
+</div>
+
+
+
+
+</div>
+
+
+<%- include('parts/scripts') %>
+
+
+<script>
+function sendForm(e){
+  e.preventDefault();
+  //要做資料檢查
+  const fd = new FormData(document.form1);
+  const usp = new URLSearchParams(fd);
+  const dataObj =Object.fromEntries(fd);
+  fetch(``, {
+    method:'POST',
+    body:fd, //multipart/form-data
+
+    /*
+    body: usp.toString(), //2. application/x-www-form-urlencoded
+    headers:{
+      'Content-Type':'application/x-www-form-urlencoded',
+    }
+    */
+
+    /*
+    body: JSON.stringify(dataObj), //3. application/json
+    headers:{
+      'Content-Type':'application/json',
+    }
+*/
+  })
+  .then(r=>r.json())
+  .then((data)=>{
+    console.log(data);
+  })
+.catch((ex)=> console.log(ex));
+}
+
+</script>
+
+<%- include('parts/html-foot') %>

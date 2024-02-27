@@ -1,0 +1,36 @@
+<%- include('parts/html-head') %>
+<!-- ejs的include function,要用-號,現在是ejs要引入其他的ejs,這時候要用相對路徑 -->
+<%- include('parts/navbar') %>
+
+
+
+<div class="container">
+
+<div class="row">
+    <div class="col-6">
+        <!-- 表單要上傳檔案一定要設定entctype,但是我們用的套件沒辦法處理,所以要先拿掉,並裝Multer -->
+        <form method="post"> 
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="text" class="form-control" id="email" name="email">
+              <div class="form-text"><%= typeof email==='undefined'? '':email %></div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password">
+              <div class="form-text"><%= locals.password ??  ''%></div>
+              <!-- local好像是類似暫存資料的地方,這裡跟email的div功用一樣 -->
+            </div>
+            <pre><%- JSON.stringify(locals, null,4)%></pre>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+    </div>
+</div>
+
+</div>
+
+
+<%- include('parts/scripts') %>
+
+<%- include('parts/html-foot') %>
